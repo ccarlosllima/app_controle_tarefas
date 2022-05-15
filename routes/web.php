@@ -2,38 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Mail\MensagenTesteMail;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
+/*
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home');
+    ->name('home')
+    ->middleware('verified');
+*/
 
-Route::get('tarefa/exportacao/{extensao}','App\Http\Controllers\TarefaController@exportacao')
-->name('tarefa.exportacao');
+Route::get('tarefa/exportacao/{extensao}', 'App\Http\Controllers\TarefaController@exportacao')
+    ->name('tarefa.exportacao');
 
-Route::get('tarefa/export','App\Http\Controllers\TarefaController@export')
-->name('tarefa.export');
-
-Route::resource('tarefa', 'App\Http\Controllers\TarefaController');
-
-Route::get('/mensagem-teste', function ()
-{
-   return new  MensagenTesteMail();
-    // Mail::to("laraveldev77@gmail.com")->send(new MensagenTesteMail());
-
-    // return "E-mail enviado com sucesso.";
-});
+Route::get('tarefa/export', 'App\Http\Controllers\TarefaController@export')
+    ->name('tarefa.export');
+    
+Route::resource('tarefa', 'App\Http\Controllers\TarefaController')
+    ->middleware('verified');

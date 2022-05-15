@@ -10,7 +10,7 @@
                     <div class="col-6">
                       Tarefas 
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 pr-5" >
                       <div class="float-right">
                         <a href="{{route('tarefa.create')}}" class="mr-3">Novo</a>
                         <a href="{{route('tarefa.exportacao',['extensao' => 'xlsx'])}}" class="mr-3">XLSX</a>
