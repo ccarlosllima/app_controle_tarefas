@@ -11,8 +11,8 @@
                       Tarefas 
                     </div>
                     <div class="col-6 pr-5" >
-                      <div class="navbar nav">
-                        <a href="{{route('tarefa.create')}}" class="mr-3">Novo</a>
+                      <div class="navbar nav ml-auto">
+                        <a href="{{route('tarefa.create')}}" class="mr-3">NOVO</a>
                         <a href="{{route('tarefa.exportacao',['extensao' => 'xlsx'])}}" class="mr-3">XLSX</a>
                         <a href="{{route('tarefa.exportacao',['extensao' => 'csv'])}}" class="mr-3">CSV</a>
                         <a href="{{route('tarefa.export')}}" target="_blank">PDF</a>
