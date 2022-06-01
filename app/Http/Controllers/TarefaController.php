@@ -44,14 +44,16 @@ class TarefaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Tarefa $tarefa)
     {
-        $dados = $request->all('tarefa','data_limite_conclusao');
+       $dados = $request->validate($tarefa->rules(),$tarefa->messages());
+
         $dados['user_id'] = auth()->user()->id;
 
         $tarefa = Tarefa::create($dados);
         $destinatario = auth()->user()->email;
-        // Mail::to($destinatario)->send(new NovaTarefaMail($tarefa));
+
+        Mail::to($destinatario)->send(new NovaTarefaMail($tarefa));
         
         return redirect()->route('tarefa.show',['tarefa'=> $tarefa->id ]);
     }
@@ -127,7 +129,6 @@ class TarefaController extends Controller
                 return redirect()->route('tarefa.index');
                 break;
         }
-        // return Excel::download(new TarefasExportacao,'tarefa.csv');
     }
     public function export()
     {

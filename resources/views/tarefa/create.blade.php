@@ -12,11 +12,23 @@
                         @csrf
                         <div class="mb-3">
                           <label class="form-label">Tarefa</label>
-                          <input type="text" class="form-control" name="tarefa">
+                          <input type="text" value="{{old('tarefa')}}" class="form-control" name="tarefa">
+                          @php
+                            // Verifica se existe erro e retorna a mensagem de alerta   
+                            if ($errors) {
+                               echo $errors->first('tarefa');
+                            }  
+                          @endphp
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Data limite conclusão</label>
                           <input type="date" class="form-control" name="data_limite_conclusao">
+                          @php
+                            // Verifica se existe erro e retorna a mensagem de alerta   
+                            if ($errors) {
+                               echo $errors->first('data_limite_conclusao');
+                            }  
+                          @endphp
                         </div>
                         <button type="submit" class="btn btn-success">Cadastrar</button>
                     </form>
